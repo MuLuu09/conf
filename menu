@@ -4,64 +4,23 @@ function create_user() {
 	useradd -M $uname
 	echo "$uname:$pass" | chpasswd
 	usermod -e $expdate $uname
+
 	myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
-	myip2="s/xxxxxxxxx/$myip/g";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo "System by MuLuu09
-
-For support:-
-Email: muluu09@gmail.com
-My Facebook: https://www.facebook.com/mohdfazren
-SMS/Telegram/Whatsapp: +601131731782
-
-";
-	echo "Details for you account";
-	echo " ";
-	echo "Username : $uname";
-	echo "Password : $pass";
-	echo "Expired Date : $expdate";
-	echo " ";
-	echo "[ TQ buy account from MappakkoE VPN/SSH ]";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
+	myip2="s/xxxxxxxxx/$myip/g";	
+	wget -qO /tmp/client.ovpn "http://128.199.80.182/script/1194-client.conf"
+	sed -i 's/remote xxxxxxxxx 1194/remote xxxxxxxxx 443/g' /tmp/client.ovpn
+	sed -i $myip2 /tmp/client.ovpn
+	echo ""
+	echo "DONE"
 }
 
 function renew_user() {
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo "System by MuLuu09
-
-For support:-
-Email: muluu09@gmail.com
-My Facebook: https://www.facebook.com/mohdfazren
-SMS/Telegram/Whatsapp: +601131731782
-
-";
-	echo "Details for you account renew";
-	echo " ";
-	echo "Username : $uname";
-	echo "New Expired Date : $expdate";
-	echo " ";
-	echo "[ TQ renew you account from MappakkoE VPN/SSH ]";
+	echo "New expiration date for $uname: $expdate...";
 	usermod -e $expdate $uname
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
-	echo " ";
 }
 
 function delete_user(){
 	userdel $uname
-	echo "Done delete $uname";
 }
 
 function expired_users(){
@@ -103,38 +62,38 @@ function used_data(){
 }
 
 clear
-echo "System by MuLuu09
+echo "MappakkoE VPN/SSH SYSTEM MENU
 
 For support:-
-Email: muluu09@gmail.com
-My Facebook: https://www.facebook.com/mohdfazren
-SMS/Telegram/Whatsapp: +601131731782
+MappakkoE 
+Telegram : @MuLuu09
+Whatsapp : +601131731782
 
 ";
 PS3='Please enter your choice: '
-options=("Tambah User" "Renew User" "Padam User" "Connected Users" "User List" "Ram Status" "Users Tidak Expired" "Expired Users" "Used Data By Users" "Current Connected OpenVPN" "Quit")
+options=("Add User" "Renew User" "Delete User" "Current Connected Users Dropbear" "User List" "Ram Status" "Users Not Expired" "Expired Users" "Used Data By Users" "Current Connected Users Openvpn" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Tambah User")
-            read -p "Masukkan username: " uname
-            read -p "Masukkan password: " pass
-            read -p "Masukkan expiry date (YYYY-MM-DD): " expdate
+        "Add User")
+            read -p "Enter username: " uname
+            read -p "Enter password: " pass
+            read -p "Enter expiry date (YYYY-MM-DD): " expdate
 	    create_user
 	    break
             ;;
         "Renew User")
-            read -p "Masukkan username untuk renew: " uname
-            read -p "Masukkan expiry date (YYYY-MM-DD): " expdate
+            read -p "Enter username to renew: " uname
+            read -p "Enter expiry date (YYYY-MM-DD): " expdate
             renew_user
             break
             ;;
-        "Padam User")
-            read -p "Masukkan username untuk dipadam: " uname
-            padam_user
+        "Delete User")
+            read -p "Enter username to be removed: " uname
+            delete_user
             break
             ;;
-		"Connected Users")
+		"Current Connected Users Dropbear")
             monssh
             break
             ;;		
@@ -147,7 +106,7 @@ do
             cat /tmp/ramcache | grep -v "Swap"
             break
             ;;	
-		"Users Tidak Expired")
+		"Users Not Expired")
 			not_expired_users
 			break
 			;;
@@ -159,14 +118,13 @@ do
 			used_data
 			break
 			;;
-   "Current Connected OpenVPN")
-     status
-     break
-     ;;
+	        "Current Connected Users Openvpn")
+			status
+			break
+			;;
         "Quit")
             break
             ;;
         *) echo invalid option;;
     esac
 done
- 
