@@ -71,7 +71,7 @@ Whatsapp : +601131731782
 
 ";
 PS3='Please enter your choice: '
-options=("Add User" "Renew User" "Delete User" "Current Connected Users Dropbear" "User List" "Ram Status" "Users Not Expired" "Expired Users" "Used Data By Users" "Current Connected Users Openvpn" "Quit")
+options=("Add User" "Renew User" "Delete User" "Connected Users Dropbear" "Connected Users Openvpn" "User List" "Ram Status" "Users Not Expired" "Expired Users" "Used Data By Users" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -93,7 +93,7 @@ do
             delete_user
             break
             ;;
-		"Current Connected Users Dropbear")
+		"Connected Users Dropbear")
             monssh
             break
             ;;		
@@ -118,7 +118,7 @@ do
 			used_data
 			break
 			;;
-	        "Current Connected Users Openvpn")
+	        "Connected Users Openvpn")
 			status
 			break
 			;;
