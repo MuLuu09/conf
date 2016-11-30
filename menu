@@ -67,15 +67,13 @@ function used_data(){
 }
 
 clear
-echo "System by En Jack Bin Melayu (Copyright 2016, BlackVps)
+echo "System by MuLuu09 (Copyright 2016, MappakoE VPN/SSH)
 
 For support:-
-Website: http://vpnpowerjack.com
-Email: zakidotmy@outlook.com
-My Facebook: https://www.facebook.com/EnJackBinMelayu
-Telegram : @JackDotMy
-SMS/Telegram/Whatsapp: +601136298728
-
+Email: muluu09@gmail.com
+My Facebook: Mohd Fazren Roslan
+Telegram : @MuLuu09
+SMS/Telegram/Whatsapp: +601131731782
 ";
 PS3='Please enter your choice: '
 options=("Add User" "Renew User" "Delete User" "User List" "Users Not Expired" "Expired Users" "Restart Server" "Change Password" "Used Data By Users" "Ram Status" "Monitor Multi Login" "Change OpenVPN Port" "Change Dropbear Port" "Change Squid3 Port" "Quit")
